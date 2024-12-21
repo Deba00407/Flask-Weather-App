@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="search-bar">
+        <form action="/weather-app" method="post">
+          <div style="display: flex; align-items: center;">
+            <input type="text" name="city" placeholder="Enter city name" value="{{ city|e }}" />
+            <button id="submit-button" type="submit">
+              <img src="{{ url_for('static', filename='icons/search.png') }}" alt="Search" />
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+      <div class="main-content">
+        <div class="current-weather">
+          <img src="{{ weather.icon }}" alt="Weather Icon" class="weather-icon" />
+          <h1 class="temperature">{{ weather.temperature }}</h1>
+          <p class="description">{{ weather.description }}</p>
+          <p class="date">
+            {{ weather.date }}<br />
+            {{ weather.day_time }}
+          </p>
+          <p id="time-of-day">{{ weather.time_of_day }}</p>
+          <h2 class="location">{{ weather.location }}</h2>
+        </div>
+
+        <div class="additional-info">
+          {% for info in weather.additional_info %}
+            <div class="info-card">
+              <h3>{{ info.title }}</h3>
+              {% if info.title == 'Sun' %}
+                {% set sun_times = info.value.split(', ') %}
+                <p>{{ sun_times[0] }}</p>
+                <p>{{ sun_times[1] }}</p>
+              {% else %}
+                <p>{{ info.value|safe }}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>

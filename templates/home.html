@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block style %}
+#container {
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        form input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
+
+        form button {
+            padding: 10px 20px;
+            border: 2px solid white;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: white;
+            color: black;
+        }
+{% endblock %}
+
+{% block body %}
+	<div id="container">
+        <h1>Welcome to the weather app!!</h1>
+		<form action = '/weather-app' method="post">
+			<input type="text" name="city" placeholder="Enter the city name" autocomplete="off">
+			<button type="submit">Get Weather Info</button>
+		</form>
+	</div>
+{% endblock %}
